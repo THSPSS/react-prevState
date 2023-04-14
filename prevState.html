@@ -11,10 +11,22 @@
     <div id="root"></div>
     <script type="text/babel">
       class App extends React.Component {
+        //this.state = ({key : value}) 의 짧은 버전
         state = {
           count: 0,
         };
 
+        //prevState를 사용하여 count에 1씩 증가시키는 메소드
+        //화살표 함수로 this.Increment와 Bind
+
+        /*
+        prevState is not a keyword or member function, 
+        you can write any word here like oldState, stackTopState, lastState. 
+        It will convert to a generic function which will do your desired work.
+        prevState : 정해진 키워드나 멤버 함수가 아님
+                    다른 단어들 사용 가능
+                    oldState , stackTopState , lastState 와 같이 자유롭게 사용가능
+        */
         Increment = () => {
           this.setState((prevState) => ({
             count: prevState.count + 1,
@@ -30,6 +42,7 @@
           }));
         };
 
+        //prevState없이 this.state.count를 사용하여 +1 씩 증가 시키는 경우
         IncrementWithoutPrevState = () => {
           this.setState(() => ({
             count: this.state.count + 1,
@@ -44,6 +57,26 @@
             count: this.state.count + 1,
           }));
         };
+
+        /*
+        First, try to guess what should the result of Count when you click both buttons... 
+        If you think the count will be incremented by 4 on click of both buttons then it's not right guess ;)
+
+        Why? because in IncrementWithoutPrevState method since there are multiple setState calls, 
+        so React batched all those calls and updates the state only in the last call of setState in this method, 
+        so at the time of last call to setState in this method this.
+        state.count is not yet updated and its value is still the same that was before entering 
+        into IncrementWithoutPrevState method so the resultant state will 
+        contain count incremented by 1.
+
+        Now on the other hand side if we analyze the Increment method: 
+        Again there are multiple setState calls and React batched them all that means the actual state will be updated in the last call of 
+        setState but the prevState will always contain the modified state 
+        in the recent setState call. As previousState.
+        
+        count value has already been incremented 3 times till the last call of 
+        setState so the resultant state will contain the count value incremented by 4.
+        */
 
         render() {
           return (
