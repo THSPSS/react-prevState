@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--리액트 사용 준비-->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class App extends React.Component {
+        state = {
+          count: 0,
+        };
+
+        Increment = () => {
+          this.setState((prevState) => ({
+            count: prevState.count + 1,
+          }));
+          this.setState((prevState) => ({
+            count: prevState.count + 1,
+          }));
+          this.setState((prevState) => ({
+            count: prevState.count + 1,
+          }));
+          this.setState((prevState) => ({
+            count: prevState.count + 1,
+          }));
+        };
+
+        IncrementWithoutPrevState = () => {
+          this.setState(() => ({
+            count: this.state.count + 1,
+          }));
+          this.setState(() => ({
+            count: this.state.count + 1,
+          }));
+          this.setState(() => ({
+            count: this.state.count + 1,
+          }));
+          this.setState(() => ({
+            count: this.state.count + 1,
+          }));
+        };
+
+        render() {
+          return (
+            <div>
+              <button onClick={this.IncrementWithoutPrevState}>
+                Increment 4 times without PrevSate
+              </button>
+              <button onClick={this.Increment}>
+                Increment 4 times without PrevSate
+              </button>
+              <h1>Count : {this.state.count}</h1>
+            </div>
+          );
+        }
+      }
+
+      //출력하기
+      const container = document.getElementById("root");
+      ReactDOM.render(<App />, container);
+    </script>
+  </body>
+</html>
