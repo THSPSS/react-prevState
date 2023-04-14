@@ -16,9 +16,6 @@
           count: 0,
         };
 
-        //prevState를 사용하여 count에 1씩 증가시키는 메소드
-        //화살표 함수로 this.Increment와 Bind
-
         /*
         prevState is not a keyword or member function, 
         you can write any word here like oldState, stackTopState, lastState. 
@@ -27,6 +24,9 @@
                     다른 단어들 사용 가능
                     oldState , stackTopState , lastState 와 같이 자유롭게 사용가능
         */
+
+        //prevState를 사용
+        //화살표 함수로 this.Increment와 Bind
         Increment = () => {
           this.setState((prevState) => ({
             count: prevState.count + 1,
@@ -42,7 +42,7 @@
           }));
         };
 
-        //prevState없이 this.state.count를 사용하여 +1 씩 증가 시키는 경우
+        //prevState없이 this.state.count를 사용
         IncrementWithoutPrevState = () => {
           this.setState(() => ({
             count: this.state.count + 1,
